@@ -1,12 +1,5 @@
 package edgeos
 
-import (
-	"fmt"
-	"path/filepath"
-	"sort"
-	"strings"
-)
-
 // CFile holds an array of file names
 type CFile struct {
 	*Env
@@ -15,29 +8,15 @@ type CFile struct {
 
 // readDir returns a listing of dnsmasq blacklist configuration files
 func (c *CFile) readDir(pattern string) ([]string, error) {
-	f, err := filepath.Glob(pattern)
-	c.Debug(fmt.Sprintf("Files: %v\n: %v", pattern, f))
-	return f, err
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // Remove deletes a CFile array of file names
-func (c *CFile) Remove() error {
-	d, err := c.readDir(fmt.Sprintf(c.FnFmt, c.Dir, c.Wildcard.Node, c.Wildcard.Name, c.Ext))
-	if err != nil {
-		return err
-	}
-	f := diffArray(c.Names, d)
-	c.Debug(fmt.Sprintf("Removing: %v", f))
-	return purgeFiles(f)
-}
+func (c *CFile) Remove() error { _ = "STUB: not implemented"; return nil }
 
 // String implements string method
-func (c *CFile) String() string {
-	return strings.Join(c.Strings(), "\n")
-}
+func (c *CFile) String() string { _ = "STUB: not implemented"; return "" }
 
 // Strings returns a sorted array of strings.
-func (c *CFile) Strings() []string {
-	sort.Strings(c.Names)
-	return c.Names
-}
+func (c *CFile) Strings() []string { _ = "STUB: not implemented"; return nil }

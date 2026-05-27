@@ -99,90 +99,29 @@ func main() {
 
 // basename removes directory components and file extensions.
 func basename(s string) string {
+	_ = "STUB: not implemented"
 	// Discard last '/' and everything before.
-	for i := len(s) - 1; i >= 0; i-- {
-		if s[i] == '/' {
-			s = s[i+1:]
-			break
-		}
-	}
-
-	// Preserve everything before last '.'
-	for i := len(s) - 1; i >= 0; i-- {
-		if s[i] == '.' {
-			s = s[:i]
-			break
-		}
-	}
-	return s
+	return ""
 }
+
+// Preserve everything before last '.'
 
 // files returns an empty *e.CFile string array
-func files(c *e.Config) *e.CFile {
-	return &e.CFile{Names: []string{}, Env: c.Env}
-}
+func files(c *e.Config) *e.CFile { _ = "STUB: not implemented"; return nil }
 
-func initEnv() (c *e.Config, err error) {
-	o := getOpts()
-	o.setArgs()
-	c = o.initEdgeOS()
-	if *o.File == "" {
-		if *o.Safe {
-			*o.File = stdCfgFile
-		}
-		if c, err = loadConfig(c, o); err != nil {
-			if _, err = os.Stat(bkpCfgFile); !os.IsNotExist(err) && *o.Safe {
-				*o.File = bkpCfgFile
-			}
-		}
-	}
-
-	return loadConfig(c, o)
-}
+func initEnv() (c *e.Config, err error) { _ = "STUB: not implemented"; return nil, nil }
 
 func loadConfig(c *e.Config, o *opts) (*e.Config, error) {
-	var err error
-
-	if err = c.Blacklist(o.getCFG(c)); err != nil {
-		fmt.Fprintf(os.Stderr, "Removing stale dnsmasq blacklist files, because %v\n", err.Error())
-		if err = files(c).Remove(); err != nil {
-			fmt.Fprintf(os.Stderr, "%v", err.Error())
-		}
-		reloadDNS(c)
-		exitCmd(0)
-	}
-
-	return c, err
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // processObjects processes local sources, downloads Internet sources and creates
 // dnsmasq configuration files
-func processObjects(c *e.Config, objects []e.IFace) error {
-	for _, o := range objects {
-		ct, err := c.NewContent(o)
-		if err != nil {
-			return err
-		}
-		if err = c.ProcessContent(ct); err != nil {
-			return err
-		}
-	}
-	return nil
-}
+func processObjects(c *e.Config, objects []e.IFace) error { _ = "STUB: not implemented"; return nil }
 
 // reloadDNS reloads the latest processed dnsmasq configuration files
-func reloadDNS(c *e.Config) {
-	if b, err := c.ReloadDNS(); err != nil {
-		logErrorf("ReloadDNS(): %v\n error: %v\n", string(b), err.Error())
-		exitCmd(1)
-	}
-	logPrintf("%s", "Successfully restarted dnsmasq")
-}
+func reloadDNS(c *e.Config) { _ = "STUB: not implemented"; return }
 
 // removeStaleFiles deletes redundant files
-func removeStaleFiles(c *e.Config) error {
-	if err := c.GetAll().Files().Remove(); err != nil {
-		return fmt.Errorf("problem removing stale files: %v", err.Error())
-	}
-	return nil
-}
+func removeStaleFiles(c *e.Config) error { _ = "STUB: not implemented"; return nil }

@@ -1,12 +1,9 @@
 package main
 
 import (
-	"fmt"
-	"os"
 	"runtime"
 
 	logging "github.com/britannic/go-logging"
-	"golang.org/x/term"
 )
 
 var (
@@ -32,72 +29,23 @@ var (
 )
 
 // inTerminal returns true if the current terminal is interactive
-func inTerminal() bool {
-	return term.IsTerminal(int(os.Stdin.Fd()))
-}
+func inTerminal() bool { _ = "STUB: not implemented"; return false }
 
 // setLogFile returns a log directory and file name dependent on the current OS
-func setLogFile(os string) string {
-	if os == "darwin" {
-		return fmt.Sprintf("/tmp/%s.log", prog)
-	}
-	return fmt.Sprintf("/var/log/%s.log", prog)
-}
+func setLogFile(os string) string { _ = "STUB: not implemented"; return "" }
 
 // newLog returns a logging.Logger pointer
-func newLog(prefix string) *logging.Logger {
-	fdFmt := logging.MustStringFormatter(
-		`%{level:.4s}[%{id:03x}]%{time:2006-01-02 15:04:05.000}: %{message}`,
-	)
-	// nolint
-	fd, err := os.OpenFile(logFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0o644)
-	if err != nil {
-		fmt.Fprint(os.Stderr, err.Error())
-	}
+func newLog(prefix string) *logging.Logger { _ = "STUB: not implemented"; return nil }
 
-	fdLog := logging.NewLogBackend(fd, "", 0)
-	fdFmttr = logging.NewBackendFormatter(fdLog, fdFmt)
-
-	sysFmttr, err := logging.NewSyslogBackend(prog + ": ")
-	if err != nil {
-		fmt.Fprint(os.Stderr, err.Error())
-	}
-
-	logging.SetBackend(fdFmttr, sysFmttr)
-
-	return logging.MustGetLogger(prog)
-}
+// nolint
 
 func newScreenLogBackend(colors []string, prefix string) *logging.LogBackend {
-	scr := logging.NewLogBackend(os.Stderr, prefix, 0)
-	if len(colors) > 0 {
-		scr.ColorConfig = boldcolors
-		scr.Color = true
-	}
-	return scr
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // screenLog adds stderr logging output to the screen
 func screenLog(prefix string) logging.LeveledBackend {
-	if haveTerm() {
-		var (
-			err      error
-			scrFmt   = `%{color:bold}%{level:.4s}%{color:reset}[%{id:03x}]%{time:15:04:05.000}: %{message}`
-			sysFmttr *logging.SyslogBackend
-		)
-
-		if sysFmttr, err = logging.NewSyslogBackend(prefix); err != nil {
-			fmt.Fprint(os.Stderr, err.Error())
-		}
-
-		return logging.SetBackend(
-			logging.NewBackendFormatter(
-				newScreenLogBackend(boldcolors, prefix),
-				logging.MustStringFormatter(scrFmt),
-			),
-			fdFmttr,
-			sysFmttr,
-		)
-	}
-	return nil
+	_ = "STUB: not implemented"
+	return *new(logging.LeveledBackend)
 }

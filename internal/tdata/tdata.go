@@ -1,21 +1,7 @@
 package tdata
 
 // Get returns r
-func Get(s string) string {
-	switch s {
-	case "cfg":
-		return Cfg
-	case "cfg2":
-		return CfgPartial
-	case "cfg3":
-		return CfgMimimal
-	case "none":
-		return CfgDeleted
-	case "fileManifest":
-		return FileManifest
-	}
-	return ""
-}
+func Get(s string) string { _ = "STUB: not implemented"; return "" }
 
 var (
 	// Cfg contains a valid full EdgeOS blacklist configuration

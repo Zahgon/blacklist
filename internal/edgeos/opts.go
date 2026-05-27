@@ -1,10 +1,6 @@
 package edgeos
 
 import (
-	"encoding/json"
-	"fmt"
-	"runtime"
-	"sync"
 	"time"
 
 	logging "github.com/britannic/go-logging"
@@ -50,223 +46,77 @@ type Wildcard struct {
 }
 
 // Debug logs debug messages when the Dbug flag is true
-func (e *Env) Debug(s ...interface{}) {
-	if e.Dbug {
-		e.Log.Debug(s...)
-	}
-}
+func (e *Env) Debug(s ...interface{}) { _ = "STUB: not implemented"; return }
 
 // Option is a recursive function
 type Option func(c *Config) Option
 
 // SetOpt sets the specified options passed as Env and returns an option to restore the last set of arg's previous values
 func (c *Config) SetOpt(opts ...Option) Option {
+	_ = "STUB: not implemented"
 	// apply all the options, and replace each with its inverse
-	for i, opt := range opts {
-		opts[i] = opt(c)
-	}
-
-	for i, j := 0, len(opts)-1; i <= j; i, j = i+1, j-1 {
-		opts[i], opts[j] = opts[j], opts[i]
-	}
-
-	return func(c *Config) Option {
-		return c.SetOpt(opts...)
-	}
+	return *new(Option)
 }
 
 // Arch sets target CPU architecture
-func Arch(s string) Option {
-	return func(c *Config) Option {
-		previous := c.Arch
-		c.Arch = s
-		return Arch(previous)
-	}
-}
+func Arch(s string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // API sets the EdgeOS CLI API command
-func API(s string) Option {
-	return func(c *Config) Option {
-		previous := c.API
-		c.API = s
-		return API(previous)
-	}
-}
+func API(s string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Bash sets the shell processor
-func Bash(s string) Option {
-	return func(c *Config) Option {
-		previous := c.Bash
-		c.Bash = s
-		return Bash(previous)
-	}
-}
+func Bash(s string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Cores sets max CPU cores
-func Cores(i int) Option {
-	return func(c *Config) Option {
-		previous := c.Cores
-		runtime.GOMAXPROCS(i)
-		c.Cores = i
-		return Cores(previous)
-	}
-}
+func Cores(i int) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Disabled toggles Disabled
-func Disabled(b bool) Option {
-	return func(c *Config) Option {
-		previous := c.Disabled
-		c.Disabled = b
-		return Disabled(previous)
-	}
-}
+func Disabled(b bool) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Dbug toggles Debug level on or off
-func Dbug(b bool) Option {
-	return func(c *Config) Option {
-		previous := c.Dbug
-		c.Dbug = b
-		return Dbug(previous)
-	}
-}
+func Dbug(b bool) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Dir sets directory location
-func Dir(s string) Option {
-	return func(c *Config) Option {
-		previous := c.Dir
-		c.Dir = s
-		return Dir(previous)
-	}
-}
+func Dir(s string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // DNSsvc sets dnsmasq restart command
-func DNSsvc(s string) Option {
-	return func(c *Config) Option {
-		previous := c.DNSsvc
-		c.DNSsvc = s
-		return DNSsvc(previous)
-	}
-}
+func DNSsvc(s string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Ext sets the blacklist file n extension
-func Ext(s string) Option {
-	return func(c *Config) Option {
-		previous := c.Ext
-		c.Ext = s
-		return Ext(previous)
-	}
-}
+func Ext(s string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // File sets the EdgeOS configuration file
-func File(s string) Option {
-	return func(c *Config) Option {
-		previous := c.File
-		c.File = s
-		return File(previous)
-	}
-}
+func File(s string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // FileNameFmt sets the EdgeOS configuration file name format
-func FileNameFmt(s string) Option {
-	return func(c *Config) Option {
-		previous := c.FnFmt
-		c.FnFmt = s
-		return FileNameFmt(previous)
-	}
-}
+func FileNameFmt(s string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // InCLI sets the CLI inSession command
-func InCLI(s string) Option {
-	return func(c *Config) Option {
-		previous := c.InCLI
-		c.InCLI = s
-		return InCLI(previous)
-	}
-}
+func InCLI(s string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Logger sets a pointer to the logger
-func Logger(l *logging.Logger) Option {
-	return func(c *Config) Option {
-		previous := c.Log
-		c.Log = l
-		return Logger(previous)
-	}
-}
+func Logger(l *logging.Logger) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Method sets the HTTP method
-func Method(s string) Option {
-	return func(c *Config) Option {
-		previous := c.Method
-		c.Method = s
-		return Method(previous)
-	}
-}
+func Method(s string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // NewConfig returns a new *Config initialized with the parameter options passed to it
-func NewConfig(opts ...Option) *Config {
-	c := Config{
-		tree: make(tree),
-		Env: &Env{
-			ctr: ctr{RWMutex: &sync.RWMutex{}, stat: make(stat)},
-			Dex: &list{RWMutex: &sync.RWMutex{}, entry: make(entry)},
-			Exc: &list{RWMutex: &sync.RWMutex{}, entry: make(entry)},
-		},
-	}
-	for _, opt := range opts {
-		opt(&c)
-	}
-	return &c
-}
+func NewConfig(opts ...Option) *Config { _ = "STUB: not implemented"; return nil }
 
 // Prefix sets the dnsmasq configuration address line prefix
-func Prefix(d string, h string) Option {
-	return func(c *Config) Option {
-		c.Pfx = dnsPfx{domain: d, host: h}
-		return Prefix(c.Pfx.domain, c.Pfx.host)
-	}
-}
+func Prefix(d string, h string) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Env Stringer interface
-func (e *Env) String() string {
-	out, err := json.MarshalIndent(e, "", "\t")
-	if err != nil {
-		return fmt.Sprintf("%e", err)
-	}
-	return string(out)
-}
+func (e *Env) String() string { _ = "STUB: not implemented"; return "" }
 
 // Test toggles testing mode on or off
-func Test(b bool) Option {
-	return func(c *Config) Option {
-		previous := c.Test
-		c.Test = b
-		return Test(previous)
-	}
-}
+func Test(b bool) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Timeout sets how long before an unresponsive goroutine is aborted
-func Timeout(t time.Duration) Option {
-	return func(c *Config) Option {
-		previous := c.Timeout
-		c.Timeout = t
-		return Timeout(previous)
-	}
-}
+func Timeout(t time.Duration) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // Verb sets the verbosity level to v
-func Verb(b bool) Option {
-	return func(c *Config) Option {
-		previous := c.Verb
-		c.Verb = b
-		return Verb(previous)
-	}
-}
+func Verb(b bool) Option { _ = "STUB: not implemented"; return *new(Option) }
 
 // WCard sets file globbing wildcard values
-func WCard(w Wildcard) Option {
-	return func(c *Config) Option {
-		previous := c.Wildcard
-		c.Wildcard = w
-		return WCard(previous)
-	}
-}
+func WCard(w Wildcard) Option { _ = "STUB: not implemented"; return *new(Option) }

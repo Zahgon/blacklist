@@ -2,31 +2,15 @@
 
 package edgeos
 
-import "strconv"
-
 func _() {
+	_ = "STUB: not implemented"
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
-	var x [1]struct{}
-	_ = x[unknown-0]
-	_ = x[domn-1]
-	_ = x[excDomn-2]
-	_ = x[excHost-3]
-	_ = x[excRoot-4]
-	_ = x[host-5]
-	_ = x[preDomn-6]
-	_ = x[preHost-7]
-	_ = x[preRoot-8]
-	_ = x[root-9]
+	return
 }
 
 const _ntype_name = "unknowndomnexcDomnexcHostexcRoothostpreDomnpreHostpreRootroot"
 
 var _ntype_index = [...]uint8{0, 7, 11, 18, 25, 32, 36, 43, 50, 57, 61}
 
-func (i ntype) String() string {
-	if i < 0 || i >= ntype(len(_ntype_index)-1) {
-		return "ntype(" + strconv.FormatInt(int64(i), 10) + ")"
-	}
-	return _ntype_name[_ntype_index[i]:_ntype_index[i+1]]
-}
+func (i ntype) String() string { _ = "STUB: not implemented"; return "" }

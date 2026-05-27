@@ -2,11 +2,7 @@
 package regx
 
 import (
-	"bytes"
-	"fmt"
 	rx "regexp"
-	"sort"
-	"strings"
 )
 
 // Leaf is a config label
@@ -45,59 +41,15 @@ type OBJ struct {
 }
 
 // NewRegex returns a map of OBJ populated with a map of precompiled regex objects
-func NewRegex() *OBJ {
-	return &OBJ{
-		RX: regexMap{
-			CMNT: rx.MustCompile(`^(?:[\/*]+)(.*?)(?:[*\/]+)$`),
-			DESC: rx.MustCompile(`^(?:description)+\s"?([^"]+)?"?$`),
-			DSBL: rx.MustCompile(`^(?:disabled)+\s([\S]+)$`),
-			FLIP: rx.MustCompile(`^(?:address=[/][.]{0,1}.*[/])(.*)$`),
-			FQDN: rx.MustCompile(`\b((?:(?:[^.-/]{0,1})[\p{L}\d-_]{1,63}[-]{0,1}[.]{1})+(?:[\p{L}]{2,63}))\b`),
-			HOST: rx.MustCompile(`^(?:address=[/][.]{0,1})(.*)(?:[/].*)$`),
-			HTTP: rx.MustCompile(`(?:^(?:http|https){1}:)(?:\/|%2f){1,2}(.*)`),
-			IPBH: rx.MustCompile(`^(?:dns-redirect-ip)+\s([\S]+)$`),
-			LBRC: rx.MustCompile(`[{]`),
-			LEAF: rx.MustCompile(`^([\S]+)+\s([\S]+)\s[{]{1}$`),
-			MISC: rx.MustCompile(`^([\w-]+)$`),
-			MLTI: rx.MustCompile(`^((?:include|exclude)+)\s([\S]+)$`),
-			MPTY: rx.MustCompile(`^$`),
-			NAME: rx.MustCompile(`^([\w-]+)\s["']{0,1}(.*?)["']{0,1}$`),
-			NODE: rx.MustCompile(`^([\w-]+)\s[{]{1}$`),
-			RBRC: rx.MustCompile(`[}]`),
-			SUFX: rx.MustCompile(`(?:#.*|\{.*|[/[].*)\z`),
-		},
-	}
-}
+func NewRegex() *OBJ { _ = "STUB: not implemented"; return nil }
 
 // SubMatch extracts the configuration value for a matched label
-func (o *OBJ) SubMatch(t Leaf, b []byte) [][]byte {
-	return o.RX[t].FindSubmatch(b)
-}
+func (o *OBJ) SubMatch(t Leaf, b []byte) [][]byte { _ = "STUB: not implemented"; return nil }
 
-func (o *OBJ) String() string {
-	var a []string
-	for k, v := range o.RX {
-		a = append(a, fmt.Sprintf("%v: %v", k.String(), v))
-	}
-	sort.Strings(a)
-	return strings.Join(a, "\n")
-}
+func (o *OBJ) String() string { _ = "STUB: not implemented"; return "" }
 
 // StripPrefixAndSuffix strips the prefix and suffix
 func (o *OBJ) StripPrefixAndSuffix(l []byte, p string) ([]byte, bool) {
-	switch {
-	case p == "http", p == "https":
-		if !o.RX[HTTP].Match(l) {
-			return l, false
-		}
-		l = o.RX[HTTP].FindSubmatch(l)[1]
-
-	case bytes.HasPrefix(l, []byte(p)):
-		l = bytes.TrimPrefix(l, []byte(p))
-	}
-
-	l = o.RX[SUFX].ReplaceAll(l, []byte{})
-	l = bytes.Replace(l, []byte(`"`), []byte{}, -1)
-
-	return bytes.TrimSpace(l), true
+	_ = "STUB: not implemented"
+	return nil, false
 }

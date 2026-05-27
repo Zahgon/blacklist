@@ -1,10 +1,6 @@
 package edgeos
 
 import (
-	"bytes"
-	"fmt"
-	"sort"
-	"strings"
 	"sync"
 )
 
@@ -17,49 +13,15 @@ type list struct {
 }
 
 // set sets the int value of entry
-func (l *list) keyExists(k []byte) bool {
-	l.RLock()
-	_, ok := l.entry[string(k)]
-	l.RUnlock()
-	return ok
-}
+func (l *list) keyExists(k []byte) bool { _ = "STUB: not implemented"; return false }
 
 // merge returns a merge of two lists
-func (l *list) merge(a *list) {
-	l.Lock()
-	for k, v := range a.entry {
-		l.entry[k] = v
-	}
-	l.Unlock()
-}
+func (l *list) merge(a *list) { _ = "STUB: not implemented"; return }
 
 // set adds a list entry map member
-func (l *list) set(k []byte) {
-	l.Lock()
-	l.entry[string(k)] = struct{}{}
-	l.Unlock()
-}
+func (l *list) set(k []byte) { _ = "STUB: not implemented"; return }
 
-func (l *list) String() string {
-	var (
-		i  int64
-		ls = make(sort.StringSlice, len(l.entry))
-	)
-	for k, v := range l.entry {
-		ls[i] = fmt.Sprintf("%q:%v,\n", string(k), v)
-		i++
-	}
-	ls.Sort()
-	return strings.Join(ls, "")
-}
+func (l *list) String() string { _ = "STUB: not implemented"; return "" }
 
 // subKeyExists returns true if part or all of the key matches
-func (l *list) subKeyExists(b []byte) bool {
-	d := bytes.Split(b, []byte("."))
-	for i := range Iter(len(d) - 1) {
-		if l.keyExists(bytes.Join(d[i:], []byte("."))) {
-			return true
-		}
-	}
-	return l.keyExists(b)
-}
+func (l *list) subKeyExists(b []byte) bool { _ = "STUB: not implemented"; return false }
